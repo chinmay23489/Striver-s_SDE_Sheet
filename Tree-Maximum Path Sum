@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int findMaxSum(TreeNode* root,int &maxi)
+    {
+      if(root==NULL){
+        return 0;
+      }
+
+      int left_sum=max(0,findMaxSum(root->left,maxi));
+      int right_sum=max(0,findMaxSum(root->right,maxi));
+
+      maxi=max(maxi,left_sum+right_sum+root->val);
+      return root->val+max(left_sum,right_sum);
+    }
+
+    int maxPathSum(TreeNode* root) {
+      int maxi=INT_MIN;
+      findMaxSum(root,maxi);
+      return maxi;
+    }
+};
